@@ -1,0 +1,151 @@
+@import'./reset.css';
+@import'./common.css';
+@import'./font.css';
+
+
+
+
+
+/* header */
+#header{
+    position: fixed;
+    top: 0;left: 0;
+    width: 100%;
+    z-index: 100;
+    transform: translateY(-100%);
+    transition: transform .3s, color .5s;
+    color: #fff;
+}
+#header.show{
+    transform: translateY(0);
+}
+/* 헤더 색상변경 */
+#header.dark{
+    color: #000;
+}
+/* 블랙 로고 */
+#header.dark .header-inner .logo img{
+    filter: none;
+}
+/* 블랙 언어선택로고 */
+#header.dark .gnb .lang-title .img svg{
+    filter: brightness(0) invert(0);
+}
+/* 블랙 언어선택아이콘 */
+#header.dark .gnb .lang-title .icon{
+    filter: brightness(0) invert(0);
+}
+
+#header .header-inner{
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 auto;
+    padding: 0 100px;
+}
+#header .header-inner .logo{
+    width: 100px;
+    padding: 17px 0;
+}
+/* 흰색 로고 */
+#header .header-inner .logo img{
+    width: 100%;
+    filter: brightness(0) invert(1);
+    transition: filter .5s;
+}
+
+#header .gnb{
+    display: flex;
+}
+#header .gnb .nav-list{
+    display: flex;
+    align-items: center;
+}
+#header .gnb .nav-item{
+    position: relative;
+}
+#header .gnb .nav-item a{
+    padding: 23px 25px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+}
+#header .gnb .nav-item .lang-title{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 20px 0 18px 25px;
+}
+#header .gnb .nav-item .lang-title .text{
+    margin: 0 5px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+}
+#header .gnb .nav-item .sub-list{
+    position: absolute;
+    right: 0;
+    top: 53px;
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    background-color: #000;
+    border: 1px solid #5a5a5a;
+    border-radius: 6px;
+    transition: all .3s;
+}
+#header .gnb .nav-item .sub-list.show{
+    opacity: 1;
+    visibility: visible;
+}
+#header .gnb .nav-item .sub-item:first-child{
+    padding-top: 6px;
+    padding-bottom: 2px;
+}
+#header .gnb .nav-item .sub-item{
+    color: #fff;
+    display: block;
+    padding: 2px 14px 4px 13px;
+    font-size: 18px;
+    line-height: 1.33;
+    font-weight: 600;
+}
+#header .gnb .nav-item .sub-item.opacity{
+    opacity: .2;
+}
+
+
+
+
+
+
+
+/* footer */
+#footer{
+    background: #000;
+    position: relative;
+    color: #fff;
+    padding: 0 100px;
+}
+#footer .footer-inner{
+    display: flex;
+    justify-content: space-between;
+    padding: 58px 0;
+}
+#footer .info{
+    font-size: 14px;
+}
+#footer .info .addr-area{
+    font-weight: 400;
+    line-height: 1;
+}
+#footer .info .copy{
+    margin-top: 10px;
+    font-weight: 300;
+    line-height: 1;
+    text-transform: uppercase;
+}
+#footer .logo{
+    width: 193px;
+    display: block;
+}

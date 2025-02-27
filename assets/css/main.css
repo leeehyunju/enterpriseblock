@@ -1,0 +1,1871 @@
+
+
+
+
+
+/* intro */
+.sc-intro{
+    /* sticky를 주려면 영역이 더 길어야하므로   
+       100vh * 8을 해줌 */
+    height: 800vh;
+    /* border: 10px solid #000; */
+}
+.sc-intro .sticky{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+.sc-intro .video-area{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.sc-intro .video-area video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* video같은 애매하게 선택되는 이벤트 없애주는 코드 */
+    pointer-events: none;
+}
+/* 배경 어두움 */
+.sc-intro .dimmed{
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    z-index: 1;
+}
+.sc-intro .text-area{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--full-height, 100vh)* 1);
+    z-index: 2;
+}
+.sc-intro .text-area .desc{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 32px;
+    white-space: nowrap;
+
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+}
+.sc-intro .text-area .desc.small{
+    font-size: 24px;
+    line-height: 1.67;
+}
+/* 화살표 */
+.sc-intro .scroll-down{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translateX(-50%);
+    transition: opacity .5s; 
+}
+.sc-intro .scroll-down.hide{
+    opacity: 0;
+}
+
+
+
+
+
+/* showcase */
+.sc-showcase{
+    position: relative;
+    height: 700vh;
+}
+.sc-showcase .sticky{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+/* 배경 어두움 */
+.sc-showcase .dimmed{
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    z-index: 1;
+}
+.sc-showcase .thumb{
+    position: relative;
+    height: 100%;
+}
+/* 이미지 3개가 겹쳐있어야해서
+    position: absolute; 줌 */
+.sc-showcase .thumb .img{
+    position: absolute;
+    top: 0;left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.sc-showcase .thumb img{
+    width: 100%;
+    /* 창의 높이 100vh;로 설정해주면 부모인 .img의 높이가 줄더라도 
+       실제 img는 줄지 않음 */
+    height: 100vh;
+    object-fit: cover;
+}
+.sc-showcase .intro-inner{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 100px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+
+    /* gsap으로 to를 쓰면 이후값을 
+       이렇게 css로 설정해줘야 함 */
+    /* opacity: 0;
+    visibility: hidden; */
+}
+.sc-showcase .desc{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 600px;
+    padding: 32px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+    color: #fff;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+}
+
+
+
+
+
+/* worker */
+.sc-worker{
+    min-height: 100vh;
+}
+.sc-worker .wrap{
+    display: flex;
+    align-items: center;
+    min-height: inherit;
+}
+.sc-worker .content{
+    width: 100%;
+    padding: 80px 0;
+}
+.sc-worker .content .headline{
+    font-size: 72px;
+    line-height: 1.28;
+    font-weight: 600;
+    max-width: 50%;
+}
+.sc-worker .content .desc{
+    padding-left: 100px;
+    margin-left: auto;
+    max-width: 50%;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+
+
+
+
+
+/* prove-value */
+.sc-prove-value{
+    position: relative;
+    padding: 218px 0 226px;
+    background: url(../images/prove.jpg) no-repeat 50%;
+    background-size: cover;
+    overflow: hidden;
+    /* ::before는 스크립트로 선택이 안되므로
+       변수를 만들어줌 */
+    --w:21.875%;
+}
+.sc-prove-value::after,
+.sc-prove-value::before{
+    content: "";
+    position: absolute;
+    /* 위에서 만들어준 변수 */
+    width: var(--w);
+    /* width: calc(68%* max(var(--progress-visible) - .15, 0)); */
+    height: 140px;
+    background-color: #fff;
+}
+.sc-prove-value::after{
+    bottom: 0;
+    left: 0;
+}
+.sc-prove-value::before{
+    top: 0;
+    right: 0;
+}
+.sc-prove-value .prove-title{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.28;
+    color: #fff;
+}
+/* 모션 컨트롤을 위해 하나의 영역으로 찝히기 위해서 줌
+   inline-block도 가능 */
+.sc-prove-value .prove-title span{
+    display: inline-flex;
+}
+/* 완성값 */
+.sc-prove-value .prove-title .title-item:nth-child(1) span{
+    transform: translateX(-172%);
+}
+.sc-prove-value .prove-title .title-item:nth-child(3) span{
+    transform: translateX(134%);
+}
+
+
+
+
+
+
+/* gallery */
+.sc-gallery .gallery-content{
+    display: flex;
+}
+.sc-gallery .gallery-content .headline{
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+
+    /* ? */
+    flex: 0 0 470px;
+    max-width: 470px;
+}
+.sc-gallery .gallery-content .title{
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.28;
+}
+.sc-gallery .img-list{
+    max-width: calc(100% - 470px);
+    padding: calc(var(--full-height, 100vh)* 1) 0;
+}
+.sc-gallery .img-list .img-item{
+    max-width: 46.4%;
+}
+.sc-gallery .img-list .img-item.odd{
+    margin-left: auto;
+}
+.sc-gallery .img-list .img-item:not(:last-child){
+    margin-bottom: 186px;
+}
+.sc-gallery .img-list .img-item .text{
+    margin: 12px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+
+
+
+
+/* possibility */
+/* 블랙 배경이 들어갔을때 글자색 바뀜 */
+.dark .sc-possibility{
+    color: #fff;
+}
+.sc-possibility .possibility-slide{
+    position: relative;
+    /* sticky가 되기위한 높이 설정 */
+    height: 500vh;
+    /* border: 10px solid #f00; */
+}
+.sc-possibility .slide-wrap{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 100px;
+    overflow: hidden;
+    /* border: 10px dashed #0f0; */
+}
+/* 슬라이드 */
+.sc-possibility .slide-inner{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    /* border: 1px solid #fff; */
+    /* flex는 자식요소들을 무조건 자기 크기안에 집어넣기때문에
+       자식 요소들의 크기가 엄청 큼에도 불구하고 감싸주지 못함!
+       그래서 자식요소들의 width를 다 인식시켜주려면, 
+       밑의 코드를 사용하면 두개의 자식요소의 width값을 다 인식할 수 있음*/
+    width: max-content;
+}
+.sc-possibility .slide-sub-inner{
+    display: flex;
+    align-items: center;
+}
+.sc-possibility .slide-head{
+    flex-shrink: 0;
+    padding: 0 160px 0 0;
+}
+.sc-possibility .slide-head .title{
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.28;
+}
+.sc-possibility .slide-body{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.sc-possibility .slide-list{
+    display: flex;
+}
+.sc-possibility .slide-item{
+    width: 300px;
+    flex-shrink: 0;
+}
+.sc-possibility .slide-item:not(:last-child){
+    margin-right: 75px;
+}
+.sc-possibility .slide-item .square-icon{
+    display: block;
+    border: 2px solid #fff;
+    border-radius: 58px;
+    background-color: #000;
+    position: relative;
+    width: 100%;
+}
+.sc-possibility .slide-item .square-icon::before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.sc-possibility .slide-item .icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sc-possibility .slide-item img{
+    max-width: 54%; 
+}
+.sc-possibility .slide-item .title{
+    margin-top: 24px;
+    padding: 0 0 0 20px;
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+}
+.sc-possibility .slide-item:not(:last-child) .square-icon:after{
+    content: '';
+    display: block;
+    position: absolute;
+    right: -44px;
+
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 20px;
+    height: 20px;
+    border: 8px solid #fff;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+/* graphic */
+.sc-possibility .slide-graphic{
+    padding: 0 60px 0 160px;
+}
+.sc-possibility .slide-graphic .graphic{
+    width: calc(100vw - 100px);
+    padding-left: 100px;
+}
+.sc-possibility .slide-graphic .graphic .graphic-inner{
+    position: relative;
+    width: 506px;
+    margin: 0 auto;
+}
+.sc-possibility .slide-graphic .graphic .graphic-inner img{
+    max-width: 100%;
+    width: 100%;
+}
+.sc-possibility .slide-graphic .text-item{
+    position: absolute;
+    left: 0;
+    text-align: center;
+}
+.sc-possibility .slide-graphic .text-item.prove{
+    top: 9%;
+    width: 100%;
+}
+.sc-possibility .slide-graphic .text-item:nth-child(2),
+.sc-possibility .slide-graphic .text-item:nth-child(3){
+    width: 33.5%;
+    bottom: 26.3%;
+}
+.sc-possibility .slide-graphic .text-item:nth-child(3){
+    /* 부모의 left값을 상속받아 그대로 가져옴 */
+    left: inherit;
+    right: 0;
+}
+.sc-possibility .slide-graphic .text-item .title{
+    font-size: 24px;
+    font-weight: 600;   
+}
+.sc-possibility .slide-graphic .text-item .sub{
+    font-size: 16px;
+    font-weight: 700;   
+}
+.sc-possibility .bottom-text{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4vh;
+    padding: 0 100px;
+}
+.sc-possibility .bottom-text .desc{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.63;
+    color: hsla(0, 0%, 100%, .6);
+}
+
+
+
+
+
+
+/* easily */
+.sc-easily{
+    min-height: 100vh;
+    color: #fff;
+}
+.sc-easily .wrap{
+    display: flex;
+    align-items: center;
+    min-height: inherit;
+}
+.sc-easily .content{
+    width: 100%;
+    padding: 80px 0;
+}
+.sc-easily .content .headline{
+    font-size: 72px;
+    line-height: 1.28;
+    font-weight: 600;
+    max-width: 50%;
+}
+.sc-easily .content .desc{
+    padding-left: 100px;
+    margin-left: auto;
+    max-width: 50%;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+
+
+
+
+
+/* feature */
+.sc-feature{
+    position: relative;
+    overflow: hidden;
+}
+.sc-feature .feature-content{
+    display: flex;
+    position: relative;
+    height: 175px;
+}
+/* 블러처리 */
+.sc-feature .feature-content::after{
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: calc(100% - 2px);
+    width: 100%;
+    /* 뒤에 있는 요소들만 흐릿하게 만들어줌 */
+    backdrop-filter: blur(50px);
+    outline: 1px solid #000;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.sc-feature .feature-content.blur::after{
+    opacity: 1;
+}
+
+.sc-feature .feature-content .item{
+    width: 33.333%;
+    padding: 45px 0;
+    text-align: center;
+    color: #fff;
+}
+.sc-feature .feature-content .item:first-child{
+    background-color: #e657af;
+    /* 전값을 세팅함 */
+    transform: translateX(-50%);
+}
+.sc-feature .feature-content .item:nth-child(2){
+    background-color: #0049ff;
+    /* 전값을 세팅함 */
+    transform: translateX(-50%);
+}
+.sc-feature .feature-content .item:nth-child(3){
+    background-color: #00bf41;
+    /* 전값을 세팅함 */
+    transform: translateX(50%);
+}
+.sc-feature .title{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding: 0 100px;
+    transform: translateY(-50%);
+    text-align: center;
+    font-weight: 600;
+    color: #fff;
+    /* ? */
+    opacity: calc((var(--progress-visible) - .52) / .15);
+
+    font-size: 40px;
+    line-height: 1.25;
+}
+.sc-feature .title.active{
+    opacity:1;
+}
+
+
+
+
+
+/* service- #service1 */
+.sc-service{
+    position: relative;
+    /* height: 100vh; */
+    color: #fff;
+}
+
+/* 코드 슬라이드 */
+#service1{
+    /* 진행되고싶은 정도의 길이 */
+    height: 500vh;
+    /* border: 10px solid #f00; */
+}
+.sc-service .slide-code .slide-wrap{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 100px;
+    overflow: hidden;
+}
+.sc-service .slide-code .slide-inner{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.sc-service .slide-code .slide-inner .slide-head{
+    flex-shrink: 0;
+    padding: 0 160px 0 0;
+}
+.sc-service .slide-code .slide-head .title{
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.28;
+}
+.sc-service .slide-code .slide-body{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.sc-service .slide-code .slide-body .card-list{
+    display: flex;
+}
+.sc-service .slide-code .slide-body .card-item{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    margin-right: 40px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #000;
+}
+.sc-service .slide-code .card-area{
+    position: relative;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    padding: 34px;
+    color: #fff;
+    overflow: hidden;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+}
+.sc-service .slide-code .card-area::before{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    content: "";
+    display: block;
+    top: 0;
+}
+/* 그라데이션 */
+.sc-service .slide-code .card-area.gradient{
+    border: 2px solid transparent;
+    padding: 0;
+    background-image: linear-gradient(#000, #000), linear-gradient(315deg, #e657af, #0049ff, #43cf2e);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+/* 자물쇠 아이콘 */
+.sc-service .slide-code .card-area .icon1{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+}
+.sc-service .slide-code .card-area .icon2{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    opacity: 0;
+}
+
+.sc-service .slide-code .card-head{
+    position: relative;
+    min-height: 110px;
+}
+.sc-service .slide-code .card-head .title{
+    font-size: 50px;
+    font-weight: 600;
+    margin-right: 46px;
+    /* 자동으로 줄바꿈 */
+    word-break: break-word;
+    line-height: 1;
+}
+.sc-service .slide-code .card-head .caption{
+    position: absolute;
+    right: 0;
+    top: 12px;
+    font-size: 30px;
+    line-height: .67;
+    color: #fff;
+    text-align: right;
+    font-family: Archivo;
+}
+.sc-service .slide-code .card-area .detail{
+    padding: 56px 50px 0 0;
+}
+.sc-service .slide-code .detail img{
+    width: 100%;
+}
+.sc-service .slide-code .info{
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 50px;
+    margin-top: auto;
+    padding-right: 40px;
+}
+.sc-service .slide-code .info .profile{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.sc-service .slide-code .info .title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+}
+.sc-service .slide-code .icon{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: block;
+    background: url(../images/service/contract-icon.png) no-repeat 50% / cover;
+}
+
+
+
+
+
+/* service- #service2 */
+.sc-service .slide-service{
+    display: flex;
+    padding: 0 100px;
+    /* border: 10px dashed #0f0; */
+    /* 카드가 대체되기위해 올려줌 */
+    margin-top: -100vh;
+}
+.sc-service .slide-service .title-area{
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 100vh;
+}
+.sc-service .slide-service .title-area .card{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#000, #000), linear-gradient(300deg, #e657af, #0049ff, #43cf2e);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+.sc-service .slide-service .card-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: linear-gradient(90deg, #43cf2e, #0049ff, #e657af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sc-service .slide-service .card .gradient{
+    background-image: linear-gradient(90deg, #43cf2e, #0049ff, #e657af);
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+.sc-service .slide-service .main-area{
+    flex: 1;
+    padding: 100vh 0 100vh 13vw;
+}
+.sc-service .slide-service .main-area .title{
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.28;
+}
+.sc-service .slide-service .main-area .desc{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+    max-width: 750px;
+    margin-top: 34px;
+}
+.sc-service .slide-service .main-area .info{
+    margin-top: 80px;
+}
+.sc-service .slide-service .info .info-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+/* 테두리 그라데이션 */
+.sc-service .slide-service .info .info-box{
+    flex: 0 0.5 400px;
+    height: 200px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#000, #000), linear-gradient(300deg, #e657af, #0049ff, #43cf2e);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+.sc-service .slide-service .info-box .box-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 10px;
+   
+    background: linear-gradient(90deg, red, transparent);
+    background: linear-gradient(90deg, #43cf2e, #0049ff, #e657af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sc-service .slide-service .info-box .gradient{
+    background-image: linear-gradient(90deg, #43cf2e, #0049ff, #e657af);
+    background-size: cover;
+    background-clip: text;
+    text-fill-color: transparent;
+
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.43;
+}
+.sc-service .slide-service .info-title{
+    margin-left: 52px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+}
+/* 슬라이드2 */
+.sc-service .service-slide{
+    margin-top: 160px;
+}
+.sc-service .service-slide .service-slide-title{
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1;
+}
+.sc-service .service-slide .operation-list{
+    display: flex;
+    margin-top: 80px;
+}
+.sc-service .service-slide .operation-item{
+    margin-right: 50px;
+}
+.sc-service .service-slide .operation-item img{
+    width: 100%;
+}
+.sc-service .service-slide .operation-item .text-area{
+    margin-top: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+}
+
+
+
+
+
+/* service- #service3 */
+#service3{
+    position: relative;
+    /* 진행되고싶은 정도의 길이 */
+    height: 500vh;
+    /* border: 10px solid #f00; */
+    /* 컨텐츠가 올라올 수 있도록 올려줌 */
+    margin-top: -100vh;
+}
+.sc-service .slide-review .slide-wrap{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 100px;
+    overflow: hidden;
+    /* border: 10px dashed #0f0; */
+}
+.sc-service .slide-review .slide-inner{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.sc-service .slide-review .slide-body{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.sc-service .slide-review .card-list{
+    display: flex;
+}
+.sc-service .slide-review .card-item{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    margin-right: 40px;
+}
+/* 테두리 그라데이션 */
+.sc-service .slide-review .card-item.card-lock{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#000,#000),linear-gradient(300deg,#e657af,#0049ff,#43cf2e);
+    background-origin: border-box;
+    background-clip: content-box,border-box;
+    z-index: 3;
+}
+.sc-service .slide-review .card-item .card-text{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.25;
+
+    background: #000;
+    border-radius: 20px;
+}
+/* 텍스트 그라데이션 */
+.sc-service .slide-review .card-text .gradient{
+    background-image: linear-gradient(90deg, #43cf2e, #0049ff, #e657af);
+    background-size: cover;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sc-service .slide-review .card-item:nth-child(2){
+    z-index: 2;
+}
+.sc-service .slide-review .card-item:nth-child(3){
+    z-index: 1;
+}
+.sc-service .slide-review .card-item .card-area{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    padding: 34px;
+    color: #fff;
+}
+/* 블러처리 */
+.sc-service .slide-review .card-item .card-area::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(40px);
+    border-radius: 20px;
+    z-index: -10;
+}
+.sc-service .slide-review .card-item .card-area.img1{
+    background: url(../images/service/image-sec-2-1.png) no-repeat top / cover;
+}
+.sc-service .slide-review .card-item .card-area.img2{
+    background: url(../images/service/image-sec-2-2.png) no-repeat top / cover;
+}
+.sc-service .slide-review .card-item .card-area.img3{
+    background: url(../images/service/image-sec-2-3.png) no-repeat top / cover;
+}
+.sc-service .slide-review .card-item .card-head{
+    position: relative;
+    min-height: 110px;
+}
+.sc-service .slide-review .card-item .card-head .title{
+    font-size: 50px;
+    font-weight: 600;
+    margin-right: 46px;
+    color: #fff;
+    word-break: break-word;
+    line-height: 1;
+}
+.sc-service .slide-review .card-item .card-head .caption{
+    position: absolute;
+    right: 0;
+    top: 12px;
+    font-size: 30px;
+    line-height: .67;
+    color: #fff;
+    text-align: right;
+    font-family: Archivo;
+}
+.sc-service .slide-review .card-item .detail{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.63;
+    padding-top: 40px;
+}
+.sc-service .slide-review .info{
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 34px;
+    margin-top: auto;
+    padding-right: 40px;
+}
+.sc-service .slide-review .info .profile{
+    display: flex;
+    align-items: center;
+    opacity: 1;
+}
+.sc-service .slide-review .info .profile .img{
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.sc-service .slide-review .info .profile .img.bg1{background: #ff009d;}
+.sc-service .slide-review .info .profile .img.bg2{background: #0049ff;}
+.sc-service .slide-review .info .profile .img.bg3{background: #26ff00;}
+.sc-service .slide-review .info .profile .name{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.63;
+    margin-left: 9px;
+}
+.sc-service .slide-review .info .icon{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: block;
+    background: url(../images/service/contract-icon.png) no-repeat 50% / cover;
+}
+
+
+
+
+
+/* service- #service4 */
+.sc-service .service-footer{
+    position: relative;
+    height: 500vh;
+    margin-top: -100vh;
+}
+.sc-service .service-footer-wrapper{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 100px;
+    overflow: hidden;
+    /* border: 10px dashed #0f0; */
+}
+.sc-service .service-footer-inner{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.sc-service .service-footer .card{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#000,#000),linear-gradient(300deg,#e657af,#0049ff,#43cf2e);
+    background-origin: border-box;
+    background-clip: content-box,border-box;
+}
+.sc-service .service-footer .card-text{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.25;
+
+    background: #000;
+    border-radius: 20px;
+}
+.sc-service .service-footer .card-text .gradient{
+    background-image: linear-gradient(90deg, #43cf2e, #0049ff, #e657af);
+    background-size: cover;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+/* 움직이는 그라데이션 */
+.sc-service .service-footer .card::before{
+    content: "";
+    display: block;
+    background-image: url(../images/service/card-glow.png);
+    background-repeat: no-repeat;
+    width: 160%;
+    height: 160%;
+    left: -30%;
+    top: -30%;
+    position: absolute;
+    background-size: cover;
+
+    opacity: 0;
+    visibility: hidden;
+
+    /* opacity: var(--card-opacity, 0);
+    visibility: var(--card-visibility, hidden); */
+}
+.sc-service .service-footer .title{
+    padding-left: 200px;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.28;
+    color: #fff;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+
+
+/* asset */
+.sc-asset .wrap{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.sc-asset .content{
+    width: 100%;
+    padding: 80px 0;
+}
+.sc-asset .content .headline{
+    font-size: 72px;
+    line-height: 1.28;
+    font-weight: 600;
+    max-width: 50%;
+}
+.sc-asset .content .desc{
+    padding-left: 100px;
+    margin-left: auto;
+    max-width: 50%;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+
+
+
+
+
+/* prove-asset */
+.sc-prove-asset{
+    position: relative;
+    padding: 218px 0 226px;
+    background: url(../images/proveAsset/prove.jpg) no-repeat 50%;
+    background-size: cover;
+    overflow: hidden;
+    --w:21.875%;
+}
+.sc-prove-asset::after,
+.sc-prove-asset::before{
+    content: "";
+    position: absolute;
+    width: var(--w);
+    height: 140px;
+    background-color: #fff;
+}
+.sc-prove-asset::after{
+    bottom: 0;
+    left: 0;
+}
+.sc-prove-asset::before{
+    top: 0;
+    right: 0;
+}
+.sc-prove-asset .prove-title{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.28;
+    color: #fff;
+}
+.sc-prove-asset .prove-title span{
+    display: inline-flex;
+}
+/* 완성값 */
+.sc-prove-asset .prove-title .title-item:nth-child(1) span{
+    transform: translateX(-114%);
+}
+.sc-prove-asset .prove-title .title-item:nth-child(3) span{
+    transform: translateX(120%);
+}
+
+
+
+
+
+/* slide-asset */
+.sc-slide-asset{
+    position: relative;
+    height: 400vh;
+}
+.sc-slide-asset .slide-wrap{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 100px;
+    overflow: hidden;
+}
+.sc-slide-asset .slide-inner{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+.sc-slide-asset .slide-sub-inner{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.sc-slide-asset .slide-head{
+    flex-shrink: 0;
+    padding: 0 160px 0 0;
+}
+.sc-slide-asset .slide-head .title{
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.28;
+}
+.sc-slide-asset .slide-body{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.sc-slide-asset .card-content .card-list{
+    display: flex;
+}
+.sc-slide-asset .card-content .card-item{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    margin-right: 40px;
+    flex-shrink: 0;
+}
+.sc-slide-asset .card-content .card-area{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    padding: 34px;
+    color: #fff;
+    overflow: hidden;
+}
+.sc-slide-asset .card-content .card-area.item-bg{
+    background: #e657af;
+} 
+.sc-slide-asset .card-content .card-area.item-bg2{
+    background: #0049ff;
+}
+.sc-slide-asset .card-content .card-area.item-bg3{
+    position: relative;
+    background: url(../images/slideAsset/image1.png) no-repeat top / cover;
+}
+/* 블러처리 */
+.sc-slide-asset .card-content .card-area.item-bg3::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* 뒤에 있는 요소들만 흐릿하게 만들어줌 */
+    backdrop-filter: blur(40px);
+    border-radius: 20px;
+    z-index: -5;
+    background-color: hsla(0, 0%, 42%, .3);
+}
+
+.sc-slide-asset .card-content .card-head{
+    position: relative;
+}     
+.sc-slide-asset .card-content .card-head .title{
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 1.24;
+    margin-right: 46px;
+}
+.sc-slide-asset .card-content .card-head .caption{
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    right: 0;
+    top: 12px;
+    font-size: 30px;
+    line-height: .67;
+    text-align: right;
+    color: #fff;
+    font-family: Archivo;
+}
+.sc-slide-asset .card-content .card-head .desc{
+    font-size: 16px;
+    line-height: 1.63;
+    font-weight: 700;
+}
+.sc-slide-asset .card-content .detail-list{
+    padding-top: 40px;
+}
+.sc-slide-asset .card-content .detail-item{
+    margin-bottom: 30px;
+}
+.sc-slide-asset .card-content .detail-item .title{
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 3px;
+}
+.sc-slide-asset .card-content .detail-item .text{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.63;
+}
+.sc-slide-asset .card-content .info{
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 34px;
+    margin-top: auto;
+    padding-right: 40px;
+}
+.sc-slide-asset .card-content .info .text{
+    font-size: 16px;
+    font-weight: 700;
+}
+.sc-slide-asset .card-content .icon{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: block;
+    background: url(../images/service/contract-icon.png) no-repeat 50% / cover;
+}
+.sc-slide-asset .text-area{
+    padding: 0 60px 0 120px;
+}
+.sc-slide-asset .text-area .desc{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+}
+/* 하단 화살표 */
+.sc-slide-asset .arrow{
+    position: fixed;
+    bottom: 55px; left: 0;
+    width: 100%;
+    /* 초기에는 보이지않게 */
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.sc-slide-asset .arrow.show{
+    opacity: 1;
+    visibility: visible;
+}
+.sc-slide-asset .arrow .arrow-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sc-slide-asset .arrow .arrow-item{
+    width: 27px;
+    height: 27px;
+    transform: rotate(45deg);
+    border-style: solid;
+    border-width: 8px;
+    border-left: 0;
+    border-bottom: 0;
+    margin-right: -6px;
+    animation: arrow 1s infinite alternate;
+}
+.sc-slide-asset .arrow .arrow-item:first-child{
+    border-image: linear-gradient(60deg, #e657af 60%, #0049ff 160%);
+    border-image-slice: 1;
+    animation-delay: .1s;
+}
+.sc-slide-asset .arrow .arrow-item:nth-child(2){
+    border-image: linear-gradient(60deg, #e657af 20%, #0049ff 145%);
+    border-image-slice: 1;
+    animation-delay: .2s;
+}
+.sc-slide-asset .arrow .arrow-item:nth-child(3){
+    border-image: linear-gradient(60deg, #e657af, #0049ff 130%);
+    border-image-slice: 1;
+    animation-delay: .3s;
+}
+.sc-slide-asset .arrow .arrow-item:nth-child(4){
+    border-image: linear-gradient(50deg, #e657af, #0049ff 100%);
+    border-image-slice: 1;
+    animation-delay: .4s;
+}
+.sc-slide-asset .arrow .arrow-item:nth-child(5){
+    border-image: linear-gradient(50deg, #e657af, #0049ff 80%);
+    border-image-slice: 1;
+    animation-delay: .5s;
+}
+.sc-slide-asset .arrow .arrow-item:nth-child(6){
+    border-image: linear-gradient(50deg, #0049ff 45%, #43cf2e 135%);
+    border-image-slice: 1;
+    animation-delay: .6s;
+}
+.sc-slide-asset .arrow .arrow-item:nth-child(7){
+    border-image: linear-gradient(51deg, #0049ff, #43cf2e 75%);
+    border-image-slice: 1;
+    animation-delay: .7s;
+}
+/* animation */
+@keyframes arrow{
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.sc-slide-asset .arrow .arrow-title{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+/* 텍스트 */
+.sc-slide-asset .arrow .arrow-title{
+    position: relative;
+}
+
+/* text1과 text2가 같은 위치에 겹쳐서 배치됨 */
+.sc-slide-asset .arrow .arrow-title .text1,
+.sc-slide-asset .arrow .arrow-title .text2 {
+    position: absolute;  
+    top: 0;
+    left: 0;
+    width: 100%;          
+    text-align: center;   
+    opacity: 0;           /* 초기 상태에서 숨김 */
+    visibility: hidden;   /* 보이지 않도록 설정 */
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* 부드러운 전환 효과 */
+}
+
+/* text1이 보일 때의 상태 */
+.sc-slide-asset .arrow .arrow-title .text1.show{
+    opacity: 1;           
+    visibility: visible;  
+}
+
+/* text2가 보일 때의 상태 */
+.sc-slide-asset .arrow .arrow-title .text2.show{
+    opacity: 1;           
+    visibility: visible;  
+}
+
+
+
+/* creator */
+.sc-creator .creator-content{
+    position: relative;
+    height: 400vh;
+}
+.sc-creator .creator-inner{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+}
+.sc-creator .creator-inner img{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+}
+.sc-creator .creator-inner .intro{
+    position: absolute;
+    left: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+
+    opacity: 0;
+    visibility: hidden;
+}
+.sc-creator .creator-inner .intro .title{
+    display: flex;
+    flex-direction: column;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+.sc-creator .creator-inner .intro .desc{
+    margin-top: 26px;
+}
+.sc-creator .creator-inner .intro .desc .text{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+/* 화살표 */
+.sc-creator .scroll-down{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translateX(-50%);
+    transition: opacity .5s;
+}
+.sc-creator .scroll-down.hide{
+    opacity: 0;
+}
+
+/* 슬라이드 */
+.sc-creator .creator-slide{
+    position: relative;
+    margin-top: 11vh;
+    height: 400vh;
+}
+.sc-creator .creator-slide .slide-wrap{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 100px;
+    overflow: hidden;
+}
+.sc-creator .creator-slide .slide-inner{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    width: max-content;
+}
+.sc-creator .creator-slide .slide-sub-inner{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.sc-creator .creator-slide .slide-head{
+    flex-shrink: 0;
+    padding: 0 160px 0 0;
+}
+.sc-creator .creator-slide .slide-head .title{
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.28;
+}
+.sc-creator .creator-slide .slide-body{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.sc-creator .creator-slide .card-content .card-list{
+    display: flex;
+}
+.sc-creator .creator-slide .card-content .card-item{
+    position: relative;
+    width: 400px;
+    height: 540px;
+    margin-right: 40px;
+    flex-shrink: 0;
+}
+.sc-creator .creator-slide .card-content .card-area{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    padding: 34px;
+    color: #fff;
+    overflow: hidden;
+}
+.sc-creator .creator-slide .card-content .card-area.item-bg{
+    position: relative;
+    background: url(../images/creator/creator1.png) no-repeat top / cover;
+}
+.sc-creator .creator-slide .card-content .card-area.item-bg::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(50px);
+    border-radius: 20px;
+    z-index: -10;
+}
+.sc-creator .creator-slide .card-content .card-area.item-bg2{background: #0049ff;}
+.sc-creator .creator-slide .card-content .card-area.item-bg3{background: #131415;}
+.sc-creator .creator-slide .card-content .card-area.item-bg4{background: #00bf41;}
+.sc-creator .creator-slide .card-head{
+    position: relative;
+    min-height: 110px;
+}
+.sc-creator .creator-slide .card-head .title{
+    font-size: 50px;
+    font-weight: 600;
+    margin-right: 46px;
+    line-height: 1.21;
+}
+.sc-creator .creator-slide .card-head .caption{
+    position: absolute;
+    right: 0;
+    top: 12px;
+    font-size: 30px;
+    line-height: .67;
+    text-align: right;
+    font-family: Archivo;
+
+    height: 100%;
+    width: 50%;
+}
+.sc-creator .creator-slide .detail{
+    font-size: 16px;
+    line-height: 1.63;
+    padding-top: 40px;
+    font-weight: 600;
+}
+.sc-creator .creator-slide .detail p{
+    margin-top: 24px;
+}
+.sc-creator .creator-slide .detail p+p{
+    margin-top: 8px;
+}
+.sc-creator .creator-slide .info{
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 34px;
+    margin-top: auto;
+    padding-right: 40px;
+}
+.sc-creator .creator-slide .info .profile{
+    display: flex;
+    align-items: center;
+    opacity: 1;
+}
+.sc-creator .creator-slide .info .profile .img{
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ff009d;
+    overflow: hidden;
+}
+.sc-creator .creator-slide .info .profile .name{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.63;
+    margin-left: 9px;
+}
+.sc-creator .creator-slide .info .icon{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: block;
+    background: url(../images/service/contract-icon.png) no-repeat 50% / cover;
+}
+.sc-creator .creator-slide .text-area{
+    padding: 0 60px 0 120px;
+}
+.sc-creator .creator-slide .text-area .desc{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.67;
+}    
+
+
+
+
+
+/* ground */
+.sc-ground{
+    padding: 0 100px; 
+}
+.sc-ground .ground-inner{
+    padding: 200px 0;
+}
+.sc-ground .ground-inner .title{
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.28;
+    margin-bottom: 34px;
+}
+.sc-ground .ground-inner .desc{
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+.sc-ground .ground-inner .button-wrap{
+    margin-top: 70px;
+    display: flex;
+}
+.sc-ground .ground-inner .button-wrap button{
+    font-size: 18px;
+    line-height: 2.22;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #000;
+    padding: 3px 21px 1px;
+    display: block;
+    margin-right: 18px;
+}
+.sc-ground .ground-inner .button-wrap .download{
+    background: #000;
+    color: #fff;
+}
+.sc-ground .ground-inner .button-wrap .link{
+    color: #000;
+}
+
+
+
+
+
+/* join */
+.sc-join{
+    color: #000;
+    overflow: hidden;
+    /* 내 크기만큼 내려가있음 */
+    transform: translateY(100%);
+    transition: .6s ease-in-out;
+    transition-delay: .4s;
+}
+.sc-join.active{
+    /* 올라옴 */
+    transform: translateY(0);
+}
+.sc-join .marquee-wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+.sc-join .marquee{
+    position: relative;
+    display: flex;
+    /* 오른쪽 기준으로 붙어있어야 함 */
+    justify-content: flex-end;
+    width: max-content;
+    animation: move 20s linear infinite;
+}
+.sc-join .marquee-list{
+    display: flex;
+}
+/* 블러처리 */
+.sc-join .marquee::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(36px);
+}
+.sc-join .marquee-item{
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    color: #fff;
+    height: 60px;
+    font-weight: 600;
+    padding: 10px 72px;
+    white-space: nowrap;
+}
+.sc-join .marquee-item > div{
+    position: relative;
+    z-index: 2;
+}
+.sc-join .marquee-item .font{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+.sc-join .marquee-item .font-italic{
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.67;
+}
+.sc-join .marquee-item:nth-child(3n-2){
+    background: #00bf41;
+}
+.sc-join .marquee-item:nth-child(3n-1){
+    background: #0049ff;
+}
+.sc-join .marquee-item:nth-child(3n){
+    background: #e657af;
+}
+
+/* animation */
+@keyframes move{
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(50%);
+    }
+}

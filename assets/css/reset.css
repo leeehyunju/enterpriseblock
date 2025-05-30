@@ -11,6 +11,7 @@ ul,ol{list-style: none;}
 
 
 body{
+    min-width: 1300px;
     font-family: "Archivo", "NotoSansCJKkr", sans-serif;
     transition: background .3s;
     background: #fff;

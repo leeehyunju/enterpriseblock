@@ -50,6 +50,7 @@
 /* 흰색 로고 */
 #header .header-inner .logo img{
     width: 100%;
+    min-width: 100px;
     filter: brightness(0) invert(1);
     transition: filter .5s;
 }
@@ -60,6 +61,7 @@
 #header .gnb .nav-list{
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 #header .gnb .nav-item{
     position: relative;
